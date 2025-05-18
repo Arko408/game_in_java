@@ -4,6 +4,7 @@ import main.KeyHandler;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class players extends entity2
@@ -48,24 +49,84 @@ public class players extends entity2
     {
         if(key.up==true)
         {
+            direction="up";
             y-=speed;
         }
         else if(key.down==true)
         {
+            direction="down";
             y+=speed;
         }
         else if(key.right==true)
         {
+            direction="right";
             x+=speed;
         }
         else if(key.left==true)
         {
+            direction="left";
             x-=speed;
+        }
+        counter++;
+        if(counter>10)
+        {
+            if(num==1)
+            {
+                num=2;
+            }
+            else if(num==2)
+            {
+                num=1;
+            }
+            counter=0;
         }
     }
     public void draw(Graphics2D g2)
     {
-        g2.setColor(Color.blue);
-        g2.fillRect(x,y,gp.size,gp.size);
+        BufferedImage image=null;
+        switch (direction)
+        {
+            case "up":
+                if(num==1)
+                {
+                    image=up1;
+                }
+                if(num==2)
+                {
+                    image=up2;
+                }
+                break;
+            case "down":
+                if(num==1)
+                {
+                    image=down1;
+                }
+                if(num==2)
+                {
+                    image=down2;
+                }
+                break;
+            case "left":
+                if(num==1)
+                {
+                    image=left1;
+                }
+                if(num==2)
+                {
+                    image=left2;
+                }
+                break;
+            case "right":
+                if(num==1)
+                {
+                    image=right1;
+                }
+                if(num==2)
+                {
+                    image=right2;
+                }
+                break;
+        }
+        g2.drawImage(image,x,y,gp.size,gp.size,null);
     }
 }
