@@ -23,6 +23,7 @@ public class players extends entity2
         y=100;
         speed=5;
         direction="down";
+
     }
     public void image()
     {
