@@ -15,5 +15,6 @@ public class game
         window.pack();
         window.setLocationRelativeTo(null);
         window.setVisible(true);
+        gamepanel.startthread();
     }
 }

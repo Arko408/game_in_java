@@ -19,15 +19,15 @@ public class KeyHandler implements KeyListener
         {
             up=true;
         }
-        else if(code==KeyEvent.VK_S)
+        if(code==KeyEvent.VK_S)
         {
             down=true;
         }
-        else if(code==KeyEvent.VK_A)
+        if(code==KeyEvent.VK_A)
         {
             left=true;
         }
-        else if(code==KeyEvent.VK_D)
+        if(code==KeyEvent.VK_D)
         {
             right=true;
         }
@@ -40,15 +40,15 @@ public class KeyHandler implements KeyListener
         {
             up=false;
         }
-        else if(code==KeyEvent.VK_S)
+        if(code==KeyEvent.VK_S)
         {
             down=false;
         }
-        else if(code==KeyEvent.VK_A)
+        if(code==KeyEvent.VK_A)
         {
             left=false;
         }
-        else if(code==KeyEvent.VK_D)
+        if(code==KeyEvent.VK_D)
         {
             right=false;
         }
