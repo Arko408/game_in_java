@@ -27,6 +27,22 @@ public class game_panel extends JPanel implements Runnable
     @Override
     public void run()
     {
+        while(thread!=null)
+        {
+            update();
+            repaint();
+        }
+    }
+    public void update()
+    {
 
+    }
+    public void paintComponent(Graphics g)
+    {
+        super.paintComponent(g);
+        Graphics2D g2=(Graphics2D)g;
+        g2.setColor(Color.darkGray);
+        g2.fillRect(150,150,size,size);
+        g2.dispose();
     }
 }
