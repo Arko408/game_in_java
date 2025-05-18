@@ -41,6 +41,7 @@ public class players extends entity2
         catch (IOException e)
         {
             e.printStackTrace();
+
         }
     }
     public void update()
