@@ -52,5 +52,6 @@ public class KeyHandler implements KeyListener
         {
             right=false;
         }
+
     }
 }
