@@ -1,26 +1,25 @@
 package main;
 
 import entity.players;
+import tile.manager;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class game_panel extends JPanel implements Runnable
 {
-    final int tile=16;
-    final int scale=3;
-    public final int size=tile*scale;
-    final int col=16;
-    final int row=14;
-    final int width=col*size;
-    final int height=row*size;
+    public final int tile=16;
+    public final int scale=3;
+    public final  int size=tile*scale;
+    public final int col=16;
+    public final int row=12;
+    public final int width=col*size;
+    public final int height=row*size;
     KeyHandler key=new KeyHandler();
     Thread thread;
     players player=new players(this,key);
-    int px=100;
-    int py=100;
-    int speed=4     ;
     int fps=60;
+    manager tilem=new manager(this);
     public game_panel()
     {
         this.setPreferredSize(new Dimension(width,height));
@@ -68,6 +67,7 @@ public class game_panel extends JPanel implements Runnable
     {
         super.paintComponent(g);
         Graphics2D g2=(Graphics2D)g;
+        tilem.draw(g2);
         player.draw(g2);
         g2.dispose();
     }
