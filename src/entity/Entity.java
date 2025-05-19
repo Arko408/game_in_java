@@ -11,5 +11,6 @@ public class Entity
     public int counter=0;
     public int num=1;
     public Rectangle solid;
+    public int solidareax,solidareay;
     public boolean collisionon=false;
 }

@@ -13,6 +13,7 @@ public class players extends Entity
     KeyHandler key;
     public final int screenx;
     public final int screeny;
+    int haskey=0;
     public players(game_panel gp,KeyHandler key2)
     {
         this.gp=gp;
@@ -22,6 +23,8 @@ public class players extends Entity
         solid=new Rectangle();
         solid.x=8;
         solid.y=16;
+        solidareax=solid.x;
+        solidareay=solid.y;
         solid.height=32;
         solid.width=32;
         defaultvalue();
@@ -31,7 +34,7 @@ public class players extends Entity
     {
         worldx=gp.size*23;
         worldy=gp.size*21;
-        speed=3;
+        speed=5;
         direction="down";
 
     }
@@ -68,6 +71,8 @@ public class players extends Entity
             }
             collisionon = false;
             gp.checker.checktile(this);
+            int objindex=gp.checker.checkobj(this,true);
+            pickupobj(objindex);
             if (collisionon == false) {
                 switch (direction) {
                     case "up":
@@ -94,6 +99,26 @@ public class players extends Entity
                     num = 1;
                 }
                 counter = 0;
+            }
+        }
+    }
+    public void pickupobj(int id)
+    {
+        if(id!=999)
+        {
+            String objname=gp.obj[id].name;
+            switch (objname)
+            {
+                case "key":
+                    haskey++;
+                    gp.obj[id]=null;
+                    break;
+                case "door":
+                    if(haskey>0)
+                    {
+                        gp.obj[id]=null;
+                        haskey--;
+                    }
             }
         }
     }
