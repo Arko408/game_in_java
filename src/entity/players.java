@@ -119,6 +119,11 @@ public class players extends Entity
                         gp.obj[id]=null;
                         haskey--;
                     }
+                    break;
+                case "boots":
+                    speed+=2;
+                    gp.obj[id]=null;
+                    break;
             }
         }
     }

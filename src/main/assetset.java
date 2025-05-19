@@ -1,6 +1,7 @@
 package main;
 
 import object.objKey;
+import object.objboots;
 import object.objchest;
 import object.objdoor;
 
@@ -40,5 +41,9 @@ public class assetset
         gp.obj[6]=new objchest();
         gp.obj[6].worldx=10*gp.size;
         gp.obj[6].worldy=7*gp.size;
+
+        gp.obj[7]=new objboots();
+        gp.obj[7].worldx=37*gp.size;
+        gp.obj[7].worldy=42*gp.size;
     }
 }
