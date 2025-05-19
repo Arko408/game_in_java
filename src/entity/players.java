@@ -20,6 +20,10 @@ public class players extends Entity
         screenx=gp.width/2-(gp.size/2);
         screeny=gp.height/2-(gp.size/2);
         solid=new Rectangle();
+        solid.x=8;
+        solid.y=16;
+        solid.height=32;
+        solid.width=32;
         defaultvalue();
         image();
     }
@@ -27,7 +31,7 @@ public class players extends Entity
     {
         worldx=gp.size*23;
         worldy=gp.size*21;
-        speed=2;
+        speed=3;
         direction="down";
 
     }
@@ -52,38 +56,45 @@ public class players extends Entity
     }
     public void update()
     {
-        if(key.up==true)
-        {
-            direction="up";
-            worldy-=speed;
-        }
-        else if(key.down==true)
-        {
-            direction="down";
-            worldy+=speed;
-        }
-        else if(key.right==true)
-        {
-            direction="right";
-            worldx+=speed;
-        }
-        else if(key.left==true)
-        {
-            direction="left";
-            worldx-=speed;
-        }
-        counter++;
-        if(counter>10)
-        {
-            if(num==1)
-            {
-                num=2;
+        if(key.up==true || key.down==true || key.left==true || key.right==true) {
+            if (key.up == true) {
+                direction = "up";
+            } else if (key.down == true) {
+                direction = "down";
+            } else if (key.right == true) {
+                direction = "right";
+            } else if (key.left == true) {
+                direction = "left";
             }
-            else if(num==2)
-            {
-                num=1;
+            collisionon = false;
+            gp.checker.checktile(this);
+            if (collisionon == false) {
+                switch (direction) {
+                    case "up":
+                        worldy -= speed;
+                        break;
+                    case "down":
+                        worldy += speed;
+                        break;
+                    case "left":
+                        worldx -= speed;
+                        break;
+                    case "right":
+                        worldx += speed;
+                        break;
+                }
             }
-            counter=0;
+
+
+            counter++;
+            if (counter > 10) {
+                if (num == 1) {
+                    num = 2;
+                } else if (num == 2) {
+                    num = 1;
+                }
+                counter = 0;
+            }
         }
     }
     public void draw(Graphics2D g2)

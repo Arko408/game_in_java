@@ -19,11 +19,12 @@ public class game_panel extends JPanel implements Runnable
     public final int worldrow=50;
     public final int worldwidth=size*worldcol;
     public final int worldheight=size*worldrow;
+    int fps=60;
     KeyHandler key=new KeyHandler();
     Thread thread;
-    public players player=new players(this,key);
-    int fps=60;
     manager tilem=new manager(this);
+    public checkcollision checker =new checkcollision(this);
+    public players player=new players(this,key);
     public game_panel()
     {
         this.setPreferredSize(new Dimension(width,height));
