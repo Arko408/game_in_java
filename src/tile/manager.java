@@ -18,9 +18,9 @@ public class manager
     {
         this.gp=gp;
         tile =new Tile[10];
-        mapnum=new int[gp.col][gp.row];
+        mapnum=new int[gp.worldcol][gp.worldrow];
         tileimage();
-        loadmap("/maps/mapofgame.txt");
+        loadmap("/maps/world01.txt");
     }
     public void tileimage()
     {
@@ -30,8 +30,17 @@ public class manager
             tile[0].image= ImageIO.read(getClass().getResourceAsStream("/tiles/grass00.png"));
             tile[1]=new Tile();
             tile[1].image= ImageIO.read(getClass().getResourceAsStream("/tiles/wall.png"));
+            tile[1].collision=true;
             tile[2]=new Tile();
             tile[2].image= ImageIO.read(getClass().getResourceAsStream("/tiles/water01.png"));
+            tile[2].collision=true;
+            tile[3]=new Tile();
+            tile[3].image= ImageIO.read(getClass().getResourceAsStream("/tiles/earth.png"));
+            tile[4]=new Tile();
+            tile[4].image= ImageIO.read(getClass().getResourceAsStream("/tiles/tree.png"));
+            tile[4].collision=true;
+            tile[5]=new Tile();
+            tile[5].image= ImageIO.read(getClass().getResourceAsStream("/tiles/road07.png"));
         }
         catch (IOException e)
         {
@@ -45,17 +54,17 @@ public class manager
             InputStream is=getClass().getResourceAsStream(path);
             BufferedReader br=new BufferedReader(new InputStreamReader(is));
             int row=0,col=0;
-            while(col<gp.col && row<gp.row)
+            while(col<gp.worldcol && row<gp.worldrow)
             {
                 String line=br.readLine();
-                while(col<gp.col)
+                while(col<gp.worldcol)
                 {
                     String numbers[]=line.split(" ");
                     int num=Integer.parseInt(numbers[col]);
                     mapnum[col][row]=num;
                     col++;
                 }
-                if(col==gp.col)
+                if(col==gp.worldcol)
                 {
                     col=0;
                     row++;
@@ -70,19 +79,28 @@ public class manager
     }
     public void draw(Graphics2D g2)
     {
-        int col=0,row=0,x=0,y=0;
-        while(col<gp.col && row<gp.row)
+        int worldcol=0;
+        int worldrow=0;
+
+        while(worldcol<gp.worldcol && worldrow<gp.worldrow)
         {
-            int tilenum=mapnum[col][row];
-            g2.drawImage(tile[tilenum].image,x,y,gp.size,gp.size,null);
-            col++;
-            x+=gp.size;
-            if(col==gp.col)
+            int tilenum=mapnum[worldcol][worldrow];
+            int worldx=worldcol*gp.size;
+            int worldy=worldrow*gp.size;
+            int screenx=worldx-gp.player.worldx+gp.player.screenx;
+            int screeny=worldy-gp.player.worldy+gp.player.screeny;
+            if(worldx+gp.size>gp.player.worldx-gp.player.screenx &&
+                    worldx-gp.size<gp.player.worldx+gp.player.screenx &&
+                    worldy+gp.size>gp.player.worldy-gp.player.screeny &&
+                    worldy-gp.size<gp.player.worldy+gp.player.screeny)
             {
-                col=0;
-                x=0;
-                row++;
-                y+=gp.size;
+                g2.drawImage(tile[tilenum].image,screenx,screeny,gp.size,gp.size,null);
+            }
+            worldcol++;
+            if(worldcol==gp.worldcol)
+            {
+                worldcol=0;
+                worldrow++;
             }
         }
     }

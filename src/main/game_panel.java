@@ -15,9 +15,13 @@ public class game_panel extends JPanel implements Runnable
     public final int row=12;
     public final int width=col*size;
     public final int height=row*size;
+    public final int worldcol=50;
+    public final int worldrow=50;
+    public final int worldwidth=size*worldcol;
+    public final int worldheight=size*worldrow;
     KeyHandler key=new KeyHandler();
     Thread thread;
-    players player=new players(this,key);
+    public players player=new players(this,key);
     int fps=60;
     manager tilem=new manager(this);
     public game_panel()

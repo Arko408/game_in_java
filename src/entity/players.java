@@ -7,22 +7,27 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-public class players extends entity2
+public class players extends Entity
 {
     game_panel gp;
     KeyHandler key;
+    public final int screenx;
+    public final int screeny;
     public players(game_panel gp,KeyHandler key2)
     {
         this.gp=gp;
         this.key=key2;
+        screenx=gp.width/2-(gp.size/2);
+        screeny=gp.height/2-(gp.size/2);
+        solid=new Rectangle();
         defaultvalue();
         image();
     }
     public void defaultvalue()
     {
-        x=100;
-        y=100;
-        speed=5;
+        worldx=gp.size*23;
+        worldy=gp.size*21;
+        speed=2;
         direction="down";
 
     }
@@ -50,22 +55,22 @@ public class players extends entity2
         if(key.up==true)
         {
             direction="up";
-            y-=speed;
+            worldy-=speed;
         }
         else if(key.down==true)
         {
             direction="down";
-            y+=speed;
+            worldy+=speed;
         }
         else if(key.right==true)
         {
             direction="right";
-            x+=speed;
+            worldx+=speed;
         }
         else if(key.left==true)
         {
             direction="left";
-            x-=speed;
+            worldx-=speed;
         }
         counter++;
         if(counter>10)
@@ -127,6 +132,6 @@ public class players extends entity2
                 }
                 break;
         }
-        g2.drawImage(image,x,y,gp.size,gp.size,null);
+        g2.drawImage(image,screenx,screeny,gp.size,gp.size,null);
     }
 }
